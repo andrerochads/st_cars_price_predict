@@ -30,7 +30,20 @@ st.markdown(
     </style>
     """, 
     unsafe_allow_html=True)
-st.markdown(" <style> div[class^='block-container'] { padding-top: 2rem; } </style> ", unsafe_allow_html=True)
+st.markdown(" <style> div[class^='block-container'] { padding-top: 1rem; } </style> ", unsafe_allow_html=True)
+
+# Esconde o botão de link dos html
+st.markdown("""
+    <style>
+    /* Hide the link button */
+    .stApp a:first-child {
+        display: none;
+    }
+    .css-15zrgzn {display: none}
+    .css-eczf16 {display: none}
+    .css-jn99sy {display: none}
+    </style>
+    """, unsafe_allow_html=True)
 
 #--------------------------------------------------------------------------------------------------------------
 # Functions
