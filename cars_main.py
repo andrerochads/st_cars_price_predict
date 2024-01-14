@@ -273,6 +273,44 @@ with col_main2:
             else:
                 st.markdown(f'<p style="text-align: center;"> &#129000 Confiabilidade da média dos semelhantes: Razoável! </p>', unsafe_allow_html=True)
 
+            # Estatísticas Simples cálculos        
+            st.write('') # Apenas para dar espaço
+            st.write('') # Apenas para dar espaço
+
+            # Total de semelhantes vendidos
+            total_semelhantes = df_filtro_semelhantes['id'].count()
+
+            # Estado mais vendido
+            df_estado_mais_vendido = (df_filtro_semelhantes.loc[:, ['estado_vendedor', 'id']].groupby('estado_vendedor')
+                                                                                            .count()
+                                                                                            .sort_values('id', ascending=False)
+                                                                                            .reset_index())
+            estado_mais_vendido = df_estado_mais_vendido.iloc[0,0]
+            estado_mais_vendido_qnt = df_estado_mais_vendido.iloc[0,1]
+
+            # Cor predominante
+            df_cor_predominante = (df_filtro_semelhantes.loc[:, ['cor', 'id']].groupby('cor')
+                                                                    .count()
+                                                                    .sort_values('id', ascending=False)
+                                                                    .reset_index())
+            cor_predominante = df_cor_predominante.iloc[0,0]
+            cor_predominante_qnt = df_estado_mais_vendido.iloc[0,1]
+
+            # Marca x % base de dados
+            filtro_marca = df[(df['marca'] == selected_marca)]
+            total_marca_s = filtro_marca['marca'].count()
+            total_marcas = df.shape[0]
+            fatia_marca_s = round((total_marca_s / total_marcas)*100, 2)
+            
+            # Simples Estatísticas
+            veiculo_marca_modelo = selected_marca + ' ' + selected_modelo
+            st.markdown(f"##### Sobre semelhantes ao: {veiculo_marca_modelo} {selected_ano_de_fabricacao}")
+            st.write(f'• Total de semelhantes vendidos: {total_semelhantes}')
+            st.write(f'• Mais vendido no estado: ({estado_mais_vendido}) com {estado_mais_vendido_qnt} vendidos.')
+            st.write(f'• Cor predominante: {cor_predominante} ({cor_predominante_qnt})')
+            st.write(f'• Veículos {selected_marca} representam {fatia_marca_s}% da base de dados.')
+
+
         elif valor_medio_s < valor_predito:
 
             # Acima da média
@@ -288,47 +326,46 @@ with col_main2:
             else:
                 st.markdown(f'<p style="text-align: center;"> &#129000 Confiabilidade da média dos semelhantes: Razoável! </p>', unsafe_allow_html=True)
 
+            # Estatísticas Simples cálculos        
+            st.write('') # Apenas para dar espaço
+            st.write('') # Apenas para dar espaço
+
+            # Total de semelhantes vendidos
+            total_semelhantes = df_filtro_semelhantes['id'].count()
+
+            # Estado mais vendido
+            df_estado_mais_vendido = (df_filtro_semelhantes.loc[:, ['estado_vendedor', 'id']].groupby('estado_vendedor')
+                                                                                            .count()
+                                                                                            .sort_values('id', ascending=False)
+                                                                                            .reset_index())
+            estado_mais_vendido = df_estado_mais_vendido.iloc[0,0]
+            estado_mais_vendido_qnt = df_estado_mais_vendido.iloc[0,1]
+
+            # Cor predominante
+            df_cor_predominante = (df_filtro_semelhantes.loc[:, ['cor', 'id']].groupby('cor')
+                                                                    .count()
+                                                                    .sort_values('id', ascending=False)
+                                                                    .reset_index())
+            cor_predominante = df_cor_predominante.iloc[0,0]
+            cor_predominante_qnt = df_estado_mais_vendido.iloc[0,1]
+
+            # Marca x % base de dados
+            filtro_marca = df[(df['marca'] == selected_marca)]
+            total_marca_s = filtro_marca['marca'].count()
+            total_marcas = df.shape[0]
+            fatia_marca_s = round((total_marca_s / total_marcas)*100, 2)
+            
+            # Simples Estatísticas
+            veiculo_marca_modelo = selected_marca + ' ' + selected_modelo
+            st.markdown(f"##### Sobre semelhantes ao: {veiculo_marca_modelo} {selected_ano_de_fabricacao}")
+            st.write(f'• Total de semelhantes vendidos: {total_semelhantes}')
+            st.write(f'• Mais vendido no estado: ({estado_mais_vendido}) com {estado_mais_vendido_qnt} vendidos.')
+            st.write(f'• Cor predominante: {cor_predominante} ({cor_predominante_qnt})')
+            st.write(f'• Veículos {selected_marca} representam {fatia_marca_s}% da base de dados.')
+
         else:
             st.write(f':sweat_smile: Porém, não existem veículos semelhantes em nossa base de dados.')
             st.write(f'Verifique se as características selecionadas para o veículo são possíveis.')     
-
-
-        # Estatísticas Simples cálculos        
-        st.write('') # Apenas para dar espaço
-        st.write('') # Apenas para dar espaço
-
-        # Total de semelhantes vendidos
-        total_semelhantes = df_filtro_semelhantes['id'].count()
-
-        # Estado mais vendido
-        df_estado_mais_vendido = (df_filtro_semelhantes.loc[:, ['estado_vendedor', 'id']].groupby('estado_vendedor')
-                                                                                        .count()
-                                                                                        .sort_values('id', ascending=False)
-                                                                                        .reset_index())
-        estado_mais_vendido = df_estado_mais_vendido.iloc[0,0]
-        estado_mais_vendido_qnt = df_estado_mais_vendido.iloc[0,1]
-
-        # Cor predominante
-        df_cor_predominante = (df_filtro_semelhantes.loc[:, ['cor', 'id']].groupby('cor')
-                                                                .count()
-                                                                .sort_values('id', ascending=False)
-                                                                .reset_index())
-        cor_predominante = df_cor_predominante.iloc[0,0]
-        cor_predominante_qnt = df_estado_mais_vendido.iloc[0,1]
-
-        # Marca x % base de dados
-        filtro_marca = df[(df['marca'] == selected_marca)]
-        total_marca_s = filtro_marca['marca'].count()
-        total_marcas = df.shape[0]
-        fatia_marca_s = round((total_marca_s / total_marcas)*100, 2)
-        
-        # Simples Estatísticas
-        veiculo_marca_modelo = selected_marca + ' ' + selected_modelo
-        st.markdown(f"##### Sobre semelhantes ao: {veiculo_marca_modelo} {selected_ano_de_fabricacao}")
-        st.write(f'• Total de semelhantes vendidos: {total_semelhantes}')
-        st.write(f'• Mais vendido no estado: ({estado_mais_vendido}) com {estado_mais_vendido_qnt} vendidos.')
-        st.write(f'• Cor predominante: {cor_predominante} ({cor_predominante_qnt})')
-        st.write(f'• Veículos {selected_marca} representam {fatia_marca_s}% da base de dados.')
 
     else:
 
