@@ -227,6 +227,9 @@ with col_main1:
     df_filtro_semelhantes = df[(df['marca'] == selected_marca) & 
                                 (df['modelo'] == selected_modelo) & 
                                 (df['ano_de_fabricacao'] == selected_ano_de_fabricacao)]
+    
+    # Para não mostrar a tabela nessa situação, mantendo a imagem car AI
+    ha_semelhantes = True
 
 
 
@@ -363,9 +366,15 @@ with col_main2:
             st.write(f'• Cor predominante: {cor_predominante} ({cor_predominante_qnt})')
             st.write(f'• Veículos {selected_marca} representam {fatia_marca_s}% da base de dados.')
 
+        # Se não calcular valor médio é porque não há veículos semelhantes, logo há NaN, entrando nesse else
         else:
+            # Caso não haja veículos semelhantes na base de dados
             st.write(f':sweat_smile: Porém, não existem veículos semelhantes em nossa base de dados.')
-            st.write(f'Verifique se as características selecionadas para o veículo são possíveis.')     
+            st.write(f'Ou verifique se as características selecionadas para o veículo são possíveis.') 
+
+            # Para não mostrar a tabela nessa situação, mantendo a imagem car AI
+            ha_semelhantes = False
+              
 
     else:
 
@@ -384,7 +393,7 @@ with col_main2:
 with col_main3:
     
     # Tabela preço, estado e regiao
-    if reciver:
+    if reciver and ha_semelhantes:
 
         st.markdown(f'#### Explore veículos semelhantes :oncoming_automobile:')
 
@@ -413,6 +422,11 @@ with col_main3:
                                                         'revisoes_dentro_agenda']])
         df_tabela_semelhantes['preco'] = df_tabela_semelhantes['preco'].apply(lambda x: round(x, 2))
         st.dataframe(df_tabela_semelhantes, height=480)
+
+    elif reciver and ha_semelhantes == False:
+        imagem_local = 'images/car_ai.jpg'
+        st.image(imagem_local, use_column_width=True, width=10)
+        st.markdown(f"""<style>img {{border-radius: 15px;}}</style>""", unsafe_allow_html=True)
 
     else:
         imagem_local = 'images/car_ai.jpg'
