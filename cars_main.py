@@ -13,7 +13,7 @@ df = pd.read_csv('datasets/df3_processed.csv')
 #--------------------------------------------------------------------------------------------------------------
 
 # Configurações gerais da página
-st.set_page_config(layout="wide", page_title="Infinity Cars Tool", page_icon="icone.png")
+st.set_page_config(layout="wide", page_title="Auto Cars Tool", page_icon="icone.png")
 st.markdown(
     """
     <style>
@@ -74,7 +74,7 @@ def clear_forms():
 #--------------------------------------------------------------------------------------------------------------
 
 # Título e Subtítulo do conteúdo
-st.markdown('# Infinity Cars')
+st.markdown('# Auto Cars')
 st.markdown('<p style="font-size:18px;">Preencha os campos abaixo com as características do veículo desejado. Vamos sugerir um preço para você.</p>', unsafe_allow_html=True)
 
 # Colunas e seus conteúdos
