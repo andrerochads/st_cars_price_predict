@@ -310,7 +310,7 @@ with col_main2:
                                                                     .sort_values('id', ascending=False)
                                                                     .reset_index())
             cor_predominante = df_cor_predominante.iloc[0,0]
-            cor_predominante_qnt = df_estado_mais_vendido.iloc[0,1]
+            cor_predominante_qnt = df_cor_predominante.iloc[0,1]
 
             # Marca x % base de dados
             filtro_marca = df[(df['marca'] == selected_marca)]
